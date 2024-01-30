@@ -24,7 +24,7 @@ class RedirectIfAuthenticated
                 return redirect(route('admin-dashboard'));
             }
             if ($guard == 'user' and Auth::guard($guard)->check()) {
-                return redirect(route('order-history'));
+                return redirect(route('investor-dashboard'));
             }
         }
 

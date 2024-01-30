@@ -21,19 +21,33 @@
 						<div id="comments">
 							<div id="respond" class="comment-respond">
 								<h3 id="reply-title" class="comment-reply-title">Please Login</h3>
-								<form action="single-post.html" method="post" class="comment-form">
-									
+								<form action="{{ route('login') }}" method="post" class="comment-form">
+									@csrf
+									@if(session()->has("error"))
+				                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+				                          {!! session("error") !!}
+				                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				                            <span aria-hidden="true">&times;</span>
+				                          </button>
+				                        </div>
+				                    @endif
 									<p class="comment-form-mail">
 										<label for="email">Email <span class="required" aria-hidden="true">*</span></label>
 										<input id="email" name="email" value="" size="35" type="text">
+										@error('password')
+										    <div class="alert alert-danger">{{ $message }}</div>
+										@enderror
 									</p>
 									<p class="comment-form-password">
 										<label for="password">Password <span class="required" aria-hidden="true">*</span></label>
 										<input id="password" name="password" value="" type="password">
+										@error('password')
+										    <div class="alert alert-danger">{{ $message }}</div>
+										@enderror
 									</p>
 									
 									<p class="form-submit">
-										<input name="submit" id="submit" class="submit button-color button-filled" value="Post login" type="submit">
+										<input name="submit" id="submit" class="submit button-color button-filled" value="Login" type="submit">
 									</p>
 								</form>
 							</div>

@@ -29,8 +29,8 @@ Route::get("/blogdetail/{id}",[HomeController::class,"blogdetail"])->name('blogd
 Route::get("/blogs",[HomeController::class,"blogs"])->name('blogs');
 Route::get("/projects",[HomeController::class,"projects"])->name('projects');
 
-Route::get("/login",[HomeController::class,"login"])->name('login');
-Route::get("/register",[HomeController::class,"register"])->name('register');
+Route::match(['get','post'],"/login",[HomeController::class,"login"])->name('login');
+Route::match(['get','post'],"/register",[HomeController::class,"register"])->name('register');
 
 // ****************** admin panel routes *********************
 
@@ -45,6 +45,17 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth:admin']],function(){
     Auth::guard('admin')->logout();
     return redirect(route('admin'));
   })->name('adminlogout');
+});
+
+// user dash board root
+
+Route::group(['prefix'=>'/admin','middleware'=>['auth:admin']],function(){
+    Route::match(['get','post'],'/user-dashboard',[HomeController::class,'dashboard'])->name('user-dashboard');
+    Route::match(['get','post'],'/investor-dashboard',[HomeController::class,'investorDashboard'])->name('investor-dashboard');
+      Route::get('/userlogout' , function(){
+    Auth::guard('user')->logout();
+    return redirect(route('login'));
+  })->name('userlogout');
 });
 
 

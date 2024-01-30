@@ -15,78 +15,127 @@
 	<div id="content" class="site-content">
 		<main class="site-section section-main">
 			<div class="container">
-				<h3>Review or change your personal settings</h3>
-				<div class="row">
-					<div class="w100 spacing1"></div>
-					<div class="col-12 col-md-4 col-lg-3">
-						<h5>User agreement</h5>
+				<h3>Add User personal settings</h3>
+				<form action="{{ route('register') }}" method="post" enctype="multipart/form-data">
+					@csrf
+					@if(session()->has("success"))
+		                <div class="alert alert-success alert-dismissible fade show" role="alert">
+		                  {!! session("success") !!}
+		                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		                    <span aria-hidden="true">&times;</span>
+		                  </button>
+		                </div>
+		              @endif
+					@if(session()->has("error"))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                          {!! session("error") !!}
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                    @endif
+					<div class="row">
+						<div class="w100 spacing1"></div>
+						<div class="col-12 col-md-4 col-lg-3">
+							<h5>User agreement</h5>
+						</div>
+						<div class="col-12 col-md-8 col-lg-6">
+							<a href="#">User agreement 461729.pdf</a>
+						</div>
+						<div class="w100 spacing1"></div>
+						<div class="col-12 col-md-4 col-lg-3">
+							<h5>Personal information</h5>
+						</div>
+						<div class="col-12 col-md-8 col-lg-6">
+							<div>
+								<label for="first-name">First name</label>
+								<input type="text" id="first-name" name="firstname" class="underline" value="">
+								@error('firstname')
+								    <div class="alert alert-danger">{{ $message }}</div>
+								@enderror
+							</div>
+							<div>
+								<label for="last-name">Last name</label>
+								<input type="text" id="last-name" name="lastname" class="underline" value="">
+								@error('lastname')
+								    <div class="alert alert-danger">{{ $message }}</div>
+								@enderror
+							</div>
+						</div>
+						<div class="w100 spacing1"></div>
+						<div class="col-12 col-md-4 col-lg-3">
+							<h5>Contact information</h5>
+						</div>
+						<div class="col-12 col-md-8 col-lg-6">
+							<div>
+								<label for="email">Email</label>
+								<input type="email" id="email" name="email" class="underline" value="">
+								@error('email')
+								    <div class="alert alert-danger">{{ $message }}</div>
+								@enderror
+							</div>
+							<div>
+								<label for="address">Address</label>
+								<input type="text" id="address" name="address" class="underline" value="Streetname 2">
+								@error('address')
+								    <div class="alert alert-danger">{{ $message }}</div>
+								@enderror
+							</div>
+							<div>
+								<label for="city">City</label>
+								<input type="text" id="city" name="city" class="underline" value="">
+								@error('city')
+								    <div class="alert alert-danger">{{ $message }}</div>
+								@enderror
+							</div>
+							<div>
+								<label for="country">Country</label>
+								<input type="text" id="country" name="country" class="underline" value="">
+								@error('country')
+								    <div class="alert alert-danger">{{ $message }}</div>
+								@enderror
+							</div>
+							<div>
+								<select id="role_id" name="role_id" class="underline">
+									<option value="0">Normal User</option>
+									<option value="2" selected="">Investor</option>
+								</select>
+								@error('role_id')
+								    <div class="alert alert-danger">{{ $message }}</div>
+								@enderror
+							</div>
+							<div>
+								<label for="profile_image">Profile Image</label>
+								<input type="file" id="profile_image" name="profile_image" class="underline" value="">
+								@error('profile_image')
+								    <div class="alert alert-danger">{{ $message }}</div>
+								@enderror
+							</div>
+						</div>
+						
+						<div class="w100 spacing1"></div>
+						<div class="col-12 col-md-4 col-lg-3">
+							<h5> Password</h5>
+						</div>
+						<div class="col-12 col-md-8 col-lg-6">
+							<label for="password">Password</label>
+							<input type="password" id="password" name="password" class="underline">
+							@error('password')
+								    <div class="alert alert-danger">{{ $message }}</div>
+								@enderror
+
+							{{-- <label for="confirm_password">Confirm password</label>
+							<input type="password" id="confirm_password" name="confirm_password" class="underline">
+							@error('confirm_password')
+								    <div class="alert alert-danger">{{ $message }}</div>
+								@enderror --}}
+						</div>
+						<div class="w100 spacing1"></div>
+						<div class="col-12 col-md-8 col-lg-6 offset-md-4 offset-lg-3">
+							<input type="submit" name="submit" value="Save User">
+						</div>
 					</div>
-					<div class="col-12 col-md-8 col-lg-6">
-						<a href="#">User agreement 461729.pdf</a>
-					</div>
-					<div class="w100 spacing1"></div>
-					<div class="col-12 col-md-4 col-lg-3">
-						<h5>Personal information</h5>
-					</div>
-					<div class="col-12 col-md-8 col-lg-6">
-						<label for="first-name">First name</label>
-						<input type="text" id="first-name" name="first-name" class="underline" disabled="" value="John">
-						<label for="last-name">Last name</label>
-						<input type="text" id="last-name" name="last-name" class="underline" disabled="" value="Doe">
-					</div>
-					<div class="w100 spacing1"></div>
-					<div class="col-12 col-md-4 col-lg-3">
-						<h5>Contact information</h5>
-					</div>
-					<div class="col-12 col-md-8 col-lg-6">
-						<label for="email">Email</label>
-						<input type="email" id="email" name="email" class="underline" disabled="" value="contact@johndoe.com">
-						<label for="phone">Phone</label>
-						<input type="tel" id="phone" name="phone" class="underline" value="+372 6891 1199">
-						<label for="country">Country</label>
-						<select id="country" name="country" class="underline">
-							<option value="lv">Latvia</option>
-							<option value="es" selected="">Estonia</option>
-							<option value="lt">Lithuania</option>
-						</select>
-						<label for="city">City</label>
-						<input type="text" id="city" name="city" class="underline" value="Tallinn">
-						<label for="address">Address</label>
-						<input type="text" id="address" name="address" class="underline" value="Streetname 2">
-					</div>
-					<div class="w100 spacing1"></div>
-					<div class="col-12 col-md-4 col-lg-3">
-						<h5>Other information</h5>
-					</div>
-					<div class="col-12 col-md-8 col-lg-6">
-						<label for="newsletter">Newsletter frequency</label>
-						<select id="newsletter" name="newsletter" class="underline">
-							<option value="never">Never</option>
-							<option value="daily">Daily</option>
-							<option value="weekly">Weekly</option>
-							<option value="monthly" selected="">Monthly</option>
-							<option value="yearly">Yearly</option>
-						</select>
-						<p class="input-checkbox"><input type="checkbox" id="notify-funding" name="notify-funding" checked> <label for="notify-funding">Notify me about deposits / withdrawals</label></p>
-						<p class="input-checkbox"><input type="checkbox" id="latest-news" name="latest-news" checked> <label for="latest-news">I want to get the latest news</label></p>
-					</div>
-					<div class="w100 spacing1"></div>
-					<div class="col-12 col-md-4 col-lg-3">
-						<h5>Change password</h5>
-					</div>
-					<div class="col-12 col-md-8 col-lg-6">
-						<label for="current-password">Current password</label>
-						<input type="password" id="current-password" name="current-password" class="underline">
-						<label for="new-password">New password</label>
-						<input type="password" id="new-password" name="new-password" class="underline">
-						<label for="confirm-password">Confirm password</label>
-						<input type="password" id="confirm-password" name="confirm-password" class="underline">
-					</div>
-					<div class="w100 spacing1"></div>
-					<div class="col-12 col-md-8 col-lg-6 offset-md-4 offset-lg-3">
-						<button type="submit">Save changes</button>
-					</div>
-				</div>
+				</form>
 			</div>
 		</main>
 	</div>
